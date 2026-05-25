@@ -30,3 +30,7 @@ enable_vpc_endpoints = true
 log_retention_days = 7
 
 health_check_path = "/health"
+
+min_capacity     = 1
+max_capacity     = 3
+cpu_target_value = 70

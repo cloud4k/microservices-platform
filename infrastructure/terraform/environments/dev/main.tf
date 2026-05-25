@@ -97,3 +97,16 @@ module "ecs" {
 
   ecs_log_group_name = module.observability.ecs_log_group_name
 }
+module "autoscaling" {
+  source = "../../modules/autoscaling"
+
+  project_name = var.project_name
+  environment  = var.environment
+
+  ecs_cluster_name = module.ecs.ecs_cluster_name
+  ecs_service_name = module.ecs.ecs_service_name
+
+  min_capacity     = var.min_capacity
+  max_capacity     = var.max_capacity
+  cpu_target_value = var.cpu_target_value
+}

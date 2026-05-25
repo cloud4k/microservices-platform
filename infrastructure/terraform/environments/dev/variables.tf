@@ -72,3 +72,15 @@ variable "health_check_path" {
   description = "ALB health check path"
   type        = string
 }
+
+variable "min_capacity" {
+  type = number
+}
+
+variable "max_capacity" {
+  type = number
+}
+
+variable "cpu_target_value" {
+  type = number
+}
