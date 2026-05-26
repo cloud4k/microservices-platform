@@ -36,12 +36,12 @@ resource "aws_security_group" "ecs" {
     security_groups = [aws_security_group.alb.id]
   }
   ingress {
-  description = "Allow HTTPS within ECS security group for VPC endpoints"
-  from_port   = 443
-  to_port     = 443
-  protocol    = "tcp"
-  self        = true
-}
+    description = "Allow HTTPS within ECS security group for VPC endpoints"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    self        = true
+  }
 
   egress {
     from_port   = 0

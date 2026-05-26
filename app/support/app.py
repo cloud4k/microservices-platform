@@ -4,7 +4,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Project 4 Enterprise ECS Platform Running"
+    return "Support service is running"
+
+@app.route("/support")
+def support():
+    return "Project 4 Support Service Response"
 
 @app.route("/health")
 def health():

@@ -34,11 +34,27 @@ variable "ecs_security_group_id" {
   type = string
 }
 
-variable "target_group_arn" {
+variable "frontend_target_group_arn" {
   type = string
 }
 
-variable "ecr_repository_url" {
+variable "sales_target_group_arn" {
+  type = string
+}
+
+variable "support_target_group_arn" {
+  type = string
+}
+
+variable "frontend_ecr_repository_url" {
+  type = string
+}
+
+variable "sales_ecr_repository_url" {
+  type = string
+}
+
+variable "support_ecr_repository_url" {
   type = string
 }
 

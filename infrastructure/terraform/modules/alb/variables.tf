@@ -25,3 +25,11 @@ variable "container_port" {
 variable "health_check_path" {
   type = string
 }
+
+variable "sales_health_check_path" {
+  type = string
+}
+
+variable "support_health_check_path" {
+  type = string
+}
