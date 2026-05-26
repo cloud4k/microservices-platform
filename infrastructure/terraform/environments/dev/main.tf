@@ -74,9 +74,22 @@ module "alb" {
   sales_health_check_path   = "/health"
   support_health_check_path = "/health"
 }
+module "service_discovery" {
+  source = "../../modules/service-discovery"
+
+  project_name = var.project_name
+  environment  = var.environment
+
+  vpc_id = module.networking.vpc_id
+
+  namespace_name = "microservices.local"
+}
 
 module "ecs" {
   source = "../../modules/ecs"
+  depends_on = [
+    module.alb
+  ]
 
   project_name = var.project_name
   environment  = var.environment
@@ -98,7 +111,8 @@ module "ecs" {
   sales_ecr_repository_url    = module.ecr.repository_urls["microservices-platform-sales"]
   support_ecr_repository_url  = module.ecr.repository_urls["microservices-platform-support"]
 
-  ecs_log_group_name = module.observability.ecs_log_group_name
+  ecs_log_group_name             = module.observability.ecs_log_group_name
+  service_discovery_service_arns = module.service_discovery.service_arns
 }
 module "autoscaling" {
   source = "../../modules/autoscaling"

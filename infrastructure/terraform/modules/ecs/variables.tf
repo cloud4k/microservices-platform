@@ -61,3 +61,6 @@ variable "support_ecr_repository_url" {
 variable "ecs_log_group_name" {
   type = string
 }
+variable "service_discovery_service_arns" {
+  type = map(string)
+}

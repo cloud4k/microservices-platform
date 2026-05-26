@@ -107,6 +107,9 @@ resource "aws_ecs_service" "service" {
     container_name   = "${var.project_name}-${var.environment}-${each.key}"
     container_port   = var.container_port
   }
+  service_registries {
+  registry_arn = var.service_discovery_service_arns[each.key]
+}
 
   depends_on = [
     aws_iam_role_policy_attachment.ecs_task_execution_role_policy
