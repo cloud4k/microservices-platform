@@ -84,3 +84,8 @@ variable "max_capacity" {
 variable "cpu_target_value" {
   type = number
 }
+
+variable "repository_names" {
+  description = "List of ECR repository names for services"
+  type        = list(string)
+}

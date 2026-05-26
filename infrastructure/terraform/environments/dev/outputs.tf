@@ -18,24 +18,8 @@ output "ecs_security_group_id" {
   value = module.security.ecs_security_group_id
 }
 
-output "ecr_api_endpoint_id" {
-  value = module.vpc_endpoints.ecr_api_endpoint_id
-}
-
-output "ecr_dkr_endpoint_id" {
-  value = module.vpc_endpoints.ecr_dkr_endpoint_id
-}
-
-output "logs_endpoint_id" {
-  value = module.vpc_endpoints.logs_endpoint_id
-}
-
-output "ecr_repository_name" {
-  value = module.ecr.repository_name
-}
-
-output "ecr_repository_url" {
-  value = module.ecr.repository_url
+output "ecr_repository_urls" {
+  value = module.ecr.repository_urls
 }
 
 output "ecs_log_group_name" {
@@ -54,6 +38,6 @@ output "ecs_cluster_name" {
   value = module.ecs.ecs_cluster_name
 }
 
-output "ecs_service_name" {
-  value = module.ecs.ecs_service_name
+output "ecs_service_names" {
+  value = module.ecs.ecs_service_names
 }

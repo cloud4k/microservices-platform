@@ -46,8 +46,7 @@ module "vpc_endpoints" {
 module "ecr" {
   source = "../../modules/ecr"
 
-  project_name = var.project_name
-  environment  = var.environment
+  repository_names = var.repository_names
 }
 
 module "observability" {
@@ -71,6 +70,9 @@ module "alb" {
 
   container_port    = var.container_port
   health_check_path = var.health_check_path
+
+  sales_health_check_path   = "/health"
+  support_health_check_path = "/health"
 }
 
 module "ecs" {
@@ -78,22 +80,23 @@ module "ecs" {
 
   project_name = var.project_name
   environment  = var.environment
+  aws_region   = var.aws_region
 
-  aws_region = var.aws_region
-
-  ecs_cpu       = var.ecs_cpu
-  ecs_memory    = var.ecs_memory
-  desired_count = var.desired_count
-
+  ecs_cpu        = var.ecs_cpu
+  ecs_memory     = var.ecs_memory
+  desired_count  = var.desired_count
   container_port = var.container_port
 
-  private_subnet_ids = module.networking.private_subnet_ids
-
+  private_subnet_ids    = module.networking.private_subnet_ids
   ecs_security_group_id = module.security.ecs_security_group_id
 
-  target_group_arn = module.alb.target_group_arn
+  frontend_target_group_arn = module.alb.target_group_arn
+  sales_target_group_arn    = module.alb.sales_target_group_arn
+  support_target_group_arn  = module.alb.support_target_group_arn
 
-  ecr_repository_url = module.ecr.repository_url
+  frontend_ecr_repository_url = module.ecr.repository_urls["microservices-platform-frontend"]
+  sales_ecr_repository_url    = module.ecr.repository_urls["microservices-platform-sales"]
+  support_ecr_repository_url  = module.ecr.repository_urls["microservices-platform-support"]
 
   ecs_log_group_name = module.observability.ecs_log_group_name
 }
@@ -104,7 +107,7 @@ module "autoscaling" {
   environment  = var.environment
 
   ecs_cluster_name = module.ecs.ecs_cluster_name
-  ecs_service_name = module.ecs.ecs_service_name
+  ecs_service_name = module.ecs.ecs_service_names["frontend"]
 
   min_capacity     = var.min_capacity
   max_capacity     = var.max_capacity

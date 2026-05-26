@@ -34,3 +34,9 @@ health_check_path = "/health"
 min_capacity     = 1
 max_capacity     = 3
 cpu_target_value = 70
+
+repository_names = [
+  "microservices-platform-frontend",
+  "microservices-platform-sales",
+  "microservices-platform-support"
+]
