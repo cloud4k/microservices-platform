@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "microservices-platform-terraform-state-643025069654"
-    key            = "dev/terraform.tfstate"
+    bucket         = "harjotscloud-shared-terraform-state"
+    key            = "microservices-platform/dev/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "microservices-platform-terraform-locks"
+    dynamodb_table = "harjotscloud-shared-terraform-locks"
     encrypt        = true
   }
 }
